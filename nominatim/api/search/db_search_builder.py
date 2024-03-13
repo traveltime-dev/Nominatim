@@ -240,7 +240,7 @@ class SearchBuilder:
         # To catch remaining results, lookup by name and address
         # We only do this if there is a reasonable number of results expected.
         exp_count = exp_count / (2**len(addr_tokens)) if addr_tokens else exp_count
-        if exp_count < 10000 and all(t.is_indexed for t in name_partials.values()):
+        if exp_count < 20000 and all(t.is_indexed for t in name_partials.values()):
             lookup = [dbf.FieldLookup('name_vector', list(name_partials.keys()), lookups.LookupAll)]
             if addr_tokens:
                 lookup.append(dbf.FieldLookup('nameaddress_vector', addr_tokens, lookups.LookupAll))
