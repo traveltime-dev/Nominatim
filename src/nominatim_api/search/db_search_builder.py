@@ -223,7 +223,7 @@ class SearchBuilder:
                            and all(t.is_indexed for t in addr_partials)
         exp_count = min(t.count for t in name_partials.values()) / (2**(len(name_partials) - 1))
 
-        if (len(name_partials) > 3 or exp_count < 8000) and partials_indexed:
+        if (len(name_partials) > 3 or exp_count < 24000) and partials_indexed:
             yield penalty, exp_count, dbf.lookup_by_names(list(name_partials.keys()), addr_tokens)
             return
 
@@ -243,7 +243,7 @@ class SearchBuilder:
         # To catch remaining results, lookup by name and address
         # We only do this if there is a reasonable number of results expected.
         exp_count = exp_count / (2**len(addr_tokens)) if addr_tokens else exp_count
-        if exp_count < 10000 and addr_count < 20000\
+        if exp_count < 30000 and addr_count < 20000\
            and all(t.is_indexed for t in name_partials.values()):
             penalty += 0.35 * max(1 if name_fulls else 0.1,
                                   5 - len(name_partials) - len(addr_tokens))
