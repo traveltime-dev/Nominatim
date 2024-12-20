@@ -52,7 +52,8 @@ flex.set_main_tags{
     bridge = 'named_with_key',
     tunnel = 'named_with_key',
     waterway = 'named',
-    place = 'always'
+    place = 'always',
+    public_transport = 'always'
 }
 
 flex.set_prefilters{delete_keys = {'note', 'note:*', 'source', '*source', 'attribution',
